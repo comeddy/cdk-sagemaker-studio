@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import { aws_ec2 } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as sagemaker from 'aws-cdk-lib/aws-sagemaker';
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
@@ -25,12 +26,12 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
     }
 
     // create a SageMaker domain
-    const defaultVpc = cdk.aws_ec2.Vpc.fromLookup(this, 'DefaultVpc', {
+    const defaultVpc = aws_ec2.Vpc.fromLookup(this, 'DefaultVpc', {
       isDefault: true
     });
 
     const vpcSubnets = defaultVpc.selectSubnets({
-      subnetType: cdk.aws_ec2.SubnetType.PUBLIC
+      subnetType: aws_ec2.SubnetType.PUBLIC
     });
 
     const domain = new sagemaker.CfnDomain(this, 'SageMakerDomain', {
