@@ -55,11 +55,15 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk docs (doc)`  Opens the CDK API Reference in your browser
 * `cdk doctor`      Checks your CDK project for potential problems
 
-## run code commands
+## Deploy your SageMaker Studio stack commands
 * `cdk synth`       emits the synthesized CloudFormation template
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 * `cdk destroy`     Destroys one or more specified stacks
+
+# Step 4 - Review your SageMaker Studio stack
+AWS 관리 콘솔에서 Cloud Formation을 열면 다음과 같은 SageMaker Studio 스택과 리소스가 생성된 것을 볼 수 있습니다.
+<!-- ![images](images/cloudformation.png) -->
 
 ## Sagemaker Execution Role
 Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
