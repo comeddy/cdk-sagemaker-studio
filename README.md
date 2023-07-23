@@ -71,15 +71,15 @@ AWS 관리 콘솔에서 Cloud Formation을 열면 다음과 같은 SageMaker Stu
 
 # Step 5 - Sagemaker Domain 과 Execution Role 생성
 Sagemaker에 SageMakerDomain 이름으로 도메인 생성 확인합니다.
-![images](images/sagemaker.png)
+![images](images/sagemaker.png)<br>
 Sagemaker Execution Role은 Cloud9이 실행된 region 혹은 aws config region 이름으로 역할생성/소멸됩니다.<br>
-![images](images/domain-sagamaker.png)
+![images](images/domain-sagamaker.png)<br>
 region이 us-east-1일 경우<br>
 ```SageMakerExecutionRole-us-east-1-cdk```
 
 region이 ap-northeast-2 일 경우<br>
 ```SageMakerExecutionRole-ap-northeast-2-cdk```
-![images](images/sagemaker-profile.png)
+![images](images/sagemaker-profile.png)<br>
 ![images](images/sagemaker-studio-0.png)
 ## Mac 같은 노트북에서 멀티리전에 배포시 aws config default를 변경
 로컬 시스템에서는 aws config default region 변경하시면 Sagemaker Execution Role도 별도 반영합니다.<br>
