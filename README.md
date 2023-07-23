@@ -24,6 +24,57 @@ import * as sagemaker from '@aws-cdk/aws-sagemaker';
 import * as sagemaker from 'aws-cdk-lib/aws-sagemaker';
 ```
 
+cdk-sagemaker-studio-stack.ts의 첫번재로 sagamaker execution rolename 을 생성합니다. 
+```
+    // create a SageMakerExecutionRole-${region}-cdk for the SageMaker Studio
+    let sagemakerExecutionRole = new Role(this, 'SageMakerExecutionRole', {
+      assumedBy: new ServicePrincipal('sagemaker.amazonaws.com'),
+      roleName: `SageMakerExecutionRole-${region}-cdk`,
+      description: 'SageMaker execution role'
+    });
+```
+
+Managed Policy 권한을 role에 부여합니다.
+```
+    sagemakerExecutionRole.addManagedPolicy(
+      ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess')
+    );
+
+    const userSettings = {
+      executionRole: sagemakerExecutionRole.roleArn,
+    }
+```
+
+Default VPC의 subnet에 Sagemaker Domain을 CfnDomain으로 생성합니다.
+```
+    // create a SageMaker domain
+    const defaultVpc = aws_ec2.Vpc.fromLookup(this, 'DefaultVpc', {
+      isDefault: true
+    });
+
+    const vpcSubnets = defaultVpc.selectSubnets({
+      subnetType: aws_ec2.SubnetType.PUBLIC
+    });
+
+    const domain = new sagemaker.CfnDomain(this, 'SageMakerDomain', {
+      authMode: 'IAM',
+      domainName: 'SageMakerDomain',
+      defaultUserSettings: userSettings,
+      subnetIds: vpcSubnets.subnetIds,
+      vpcId: defaultVpc.vpcId,
+    });
+```
+
+profile name을 team과 name으로 하여 Sagemaker 사용자를 생성합니다.
+```
+    const profile = {'team': 'data-sciences', 'name': 'youngjin'}
+    new sagemaker.CfnUserProfile(this, 'SageMakerUserProfile', {
+      domainId: domain.attrDomainId,
+      userProfileName: `${profile.team}-${profile.name}`,
+      userSettings: userSettings,
+    });
+```
+
 # Step 1 - Cloud9 instance role change to role
 1. Cloud9을 위한 IAM 역할 생성
    IAM > role 생성(역할 만들기) > EC2 사용사례 선택
@@ -77,8 +128,6 @@ Sagemaker Execution Role은 Cloud9이 실행된 region 혹은 aws config region 
 region이 us-east-1일 경우<br>
 ```SageMakerExecutionRole-us-east-1-cdk```
 
-region이 ap-northeast-2 일 경우<br>
-```SageMakerExecutionRole-ap-northeast-2-cdk```
 ![images](images/sagemaker-profile.png)<br>
 ![images](images/sagemaker-studio-0.png)
 ## Mac 같은 노트북에서 멀티리전에 배포시 aws config default를 변경
@@ -87,9 +136,11 @@ region이 ap-northeast-2 일 경우<br>
 
 ```
 [default]
-region = us-east-1
+region = ap-northeast-2
 output = json
 ```
+region이 ap-northeast-2 일 경우<br>
+```SageMakerExecutionRole-ap-northeast-2-cdk```
 
 ## Sagemaker studio 사용자 프로필 로그인
 ![images](images/sagemaker-studio.png)
