@@ -1,1 +1,4 @@
 node_modules
+
+#CDk asset staging directory
+cdk.out

@@ -1,208 +1,97 @@
 {
  "Resources": {
+  "SageMakerExecutionRole7843F3B8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sagemaker.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "SageMaker execution role",
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSageMakerFullAccess"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "SageMakerExecutionRole-ap-northeast-2-cdk"
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkSagemakerStudioStack/SageMakerExecutionRole/Resource"
+   }
+  },
+  "SageMakerDomain": {
+   "Type": "AWS::SageMaker::Domain",
+   "Properties": {
+    "AuthMode": "IAM",
+    "DefaultUserSettings": {
+     "ExecutionRole": {
+      "Fn::GetAtt": [
+       "SageMakerExecutionRole7843F3B8",
+       "Arn"
+      ]
+     }
+    },
+    "DomainName": "SageMakerDomain",
+    "SubnetIds": [
+     "subnet-0180288d5f37dcea9",
+     "subnet-0df0072b5e1142f02",
+     "subnet-004478c4c6e2e0981",
+     "subnet-0523fe5a7e3849476"
+    ],
+    "VpcId": "vpc-06f4725284c664e21"
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkSagemakerStudioStack/SageMakerDomain"
+   }
+  },
+  "SageMakerUserProfile": {
+   "Type": "AWS::SageMaker::UserProfile",
+   "Properties": {
+    "DomainId": {
+     "Fn::GetAtt": [
+      "SageMakerDomain",
+      "DomainId"
+     ]
+    },
+    "UserProfileName": "data-sciences-youngjin",
+    "UserSettings": {
+     "ExecutionRole": {
+      "Fn::GetAtt": [
+       "SageMakerExecutionRole7843F3B8",
+       "Arn"
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "CdkSagemakerStudioStack/SageMakerUserProfile"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzfRM1BMLC/WTU7J1s3JTNKrDi5JTM7WcU7LC0otzi8tSk4FsZ3z81IySzLz82p18vJTUvWyivXLDC30DE2BurOKMzN1i0rzSjJzU/WCIDQAINw4UlkAAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/y2NTQrCMBCFz+I+Ga0outcDSMR1GdOpTNMkkGntIuTuptTV93g/vCNcTnDY4SLadk6P/Ib8nNA6Va02M3rIJo6kbn1YWZTghzw6SpCrd48eOazpSyg9Uuy5looyJHFOdtv9dVEhdgSD7L/NFZpz/R2EWac5TOwJzMYf5W8n55MAAAA="
    },
    "Metadata": {
     "aws:cdk:path": "CdkSagemakerStudioStack/CDKMetadata/Default"
-   },
-   "Condition": "CDKMetadataAvailable"
-  }
- },
- "Conditions": {
-  "CDKMetadataAvailable": {
-   "Fn::Or": [
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "af-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-northeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ap-southeast-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "ca-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "cn-northwest-1"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-central-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-north-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-2"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "eu-west-3"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "me-south-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "sa-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-east-2"
-       ]
-      }
-     ]
-    },
-    {
-     "Fn::Or": [
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-west-1"
-       ]
-      },
-      {
-       "Fn::Equals": [
-        {
-         "Ref": "AWS::Region"
-        },
-        "us-west-2"
-       ]
-      }
-     ]
-    }
-   ]
+   }
   }
  },
  "Parameters": {

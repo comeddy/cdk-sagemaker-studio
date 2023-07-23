@@ -1,16 +1,17 @@
 {
   "version": "31.0.0",
   "files": {
-    "39a771efde3eeeaba0afd74d4fd3aea7823f17ebe9da620c90ad9007849c26af": {
+    "db9016e9bce393e3d83799e9108f435746927a75c329d40a17794e84d729afe6": {
       "source": {
         "path": "CdkSagemakerStudioStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region": {
-          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "39a771efde3eeeaba0afd74d4fd3aea7823f17ebe9da620c90ad9007849c26af.json",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        "045364116382-ap-northeast-2": {
+          "bucketName": "cdk-hnb659fds-assets-045364116382-ap-northeast-2",
+          "objectKey": "db9016e9bce393e3d83799e9108f435746927a75c329d40a17794e84d729afe6.json",
+          "region": "ap-northeast-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::045364116382:role/cdk-hnb659fds-file-publishing-role-045364116382-ap-northeast-2"
         }
       }
     }

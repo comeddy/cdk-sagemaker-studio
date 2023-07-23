@@ -8,6 +8,165 @@
         "id": "CdkSagemakerStudioStack",
         "path": "CdkSagemakerStudioStack",
         "children": {
+          "SageMakerExecutionRole": {
+            "id": "SageMakerExecutionRole",
+            "path": "CdkSagemakerStudioStack/SageMakerExecutionRole",
+            "children": {
+              "ImportSageMakerExecutionRole": {
+                "id": "ImportSageMakerExecutionRole",
+                "path": "CdkSagemakerStudioStack/SageMakerExecutionRole/ImportSageMakerExecutionRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.74.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "CdkSagemakerStudioStack/SageMakerExecutionRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "sagemaker.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "SageMaker execution role",
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/AmazonSageMakerFullAccess"
+                          ]
+                        ]
+                      }
+                    ],
+                    "roleName": "SageMakerExecutionRole-ap-northeast-2-cdk"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.74.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.74.0"
+            }
+          },
+          "DefaultVpc": {
+            "id": "DefaultVpc",
+            "path": "CdkSagemakerStudioStack/DefaultVpc",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "CdkSagemakerStudioStack/DefaultVpc/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.74.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "CdkSagemakerStudioStack/DefaultVpc/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.74.0"
+                }
+              },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "CdkSagemakerStudioStack/DefaultVpc/PublicSubnet3",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.74.0"
+                }
+              },
+              "PublicSubnet4": {
+                "id": "PublicSubnet4",
+                "path": "CdkSagemakerStudioStack/DefaultVpc/PublicSubnet4",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.74.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.74.0"
+            }
+          },
+          "SageMakerDomain": {
+            "id": "SageMakerDomain",
+            "path": "CdkSagemakerStudioStack/SageMakerDomain",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::SageMaker::Domain",
+              "aws:cdk:cloudformation:props": {
+                "authMode": "IAM",
+                "defaultUserSettings": {
+                  "executionRole": {
+                    "Fn::GetAtt": [
+                      "SageMakerExecutionRole7843F3B8",
+                      "Arn"
+                    ]
+                  }
+                },
+                "domainName": "SageMakerDomain",
+                "subnetIds": [
+                  "subnet-0180288d5f37dcea9",
+                  "subnet-0df0072b5e1142f02",
+                  "subnet-004478c4c6e2e0981",
+                  "subnet-0523fe5a7e3849476"
+                ],
+                "vpcId": "vpc-06f4725284c664e21"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_sagemaker.CfnDomain",
+              "version": "2.74.0"
+            }
+          },
+          "SageMakerUserProfile": {
+            "id": "SageMakerUserProfile",
+            "path": "CdkSagemakerStudioStack/SageMakerUserProfile",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::SageMaker::UserProfile",
+              "aws:cdk:cloudformation:props": {
+                "domainId": {
+                  "Fn::GetAtt": [
+                    "SageMakerDomain",
+                    "DomainId"
+                  ]
+                },
+                "userProfileName": "data-sciences-youngjin",
+                "userSettings": {
+                  "executionRole": {
+                    "Fn::GetAtt": [
+                      "SageMakerExecutionRole7843F3B8",
+                      "Arn"
+                    ]
+                  }
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_sagemaker.CfnUserProfile",
+              "version": "2.74.0"
+            }
+          },
           "CDKMetadata": {
             "id": "CDKMetadata",
             "path": "CdkSagemakerStudioStack/CDKMetadata",
@@ -17,14 +176,6 @@
                 "path": "CdkSagemakerStudioStack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.74.0"
-                }
-              },
-              "Condition": {
-                "id": "Condition",
-                "path": "CdkSagemakerStudioStack/CDKMetadata/Condition",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnCondition",
                   "version": "2.74.0"
                 }
               }
