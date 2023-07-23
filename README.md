@@ -30,13 +30,13 @@ AWS CDK command line installed
     "Arn": "arn:aws:sts::045364116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
 }
 ```
-# Step 1 - Clone the code Github repo
+# Step 2 - Clone the code Github repo
 `git clone https://github.com/comeddy/cdk-sagemaker-studio.git`<br>
 `cd cdk-sagemaker-studio`
 
 `bin/cdk-sagemaker-studio.ts` - 메인 CDK 앱과 스택이 정의된 엔트리 포인트 파일입니다.<br>
 `lib/cdk-sagemaker-studio-stack.ts` -  스튜디오 도메인, 스튜디오 사용자 프로필 및 스튜디오 사용자 앱을 정의하는 세이지메이커 스튜디오 스택 파일입니다.
-# Welcome to your CDK TypeScript project
+# Step 3 - Welcome to your CDK TypeScript project
 
 This is a blank project for CDK development with TypeScript.
 
