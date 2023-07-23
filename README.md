@@ -9,11 +9,20 @@ NodeJS Installed
 
 AWS CDK command line installed
 * `npm install -g aws-cdk` or `npm install -g aws-cdk@2.88.0 --force`
-* `cdk --version`
+* `cdk --version`<br>
   This cdk test on 2.88.0 (build 5d497f9)
 
+## CDK version2 install
 * `npm install aws-cdk-lib`
 * `npm install constructs`
+  
+이 문서에 표시된 모든 하위 라이브러리는 이미 aws-cdk-lib에 있습니다.
+```
+// for v1
+import * as sagemaker from '@aws-cdk/aws-sagemaker';
+// for v2
+import * as sagemaker from 'aws-cdk-lib/aws-sagemaker';
+```
 
 # Step 1 - Cloud9 instance role change to role
 1. Cloud9을 위한 IAM 역할 생성
@@ -43,14 +52,14 @@ This is a blank project for CDK development with TypeScript.
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 ## Useful commands
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
+* `cdk docs (doc)`  Opens the CDK API Reference in your browser
+* `cdk doctor`      Checks your CDK project for potential problems
 
 ## run code commands
 * `cdk synth`       emits the synthesized CloudFormation template
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
+* `cdk destroy`     Destroys one or more specified stacks
 
 ## Sagemaker Execution Role
 Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
