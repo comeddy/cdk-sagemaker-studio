@@ -80,7 +80,7 @@ region이 us-east-1일 경우<br>
 region이 ap-northeast-2 일 경우<br>
 ```SageMakerExecutionRole-ap-northeast-2-cdk```
 ![images](images/sagemaker-profile.png)
-
+![images](images/sagemaker-studio-0.png)
 ## Sagemaker Execution Role이 Mac 같은 노트북에서 실행시 aws config default로 생성
 로컬 시스템에서는 aws config default region 변경하여 반영합니다.<br>
 * `vi ~/.aws/config`
