@@ -54,11 +54,11 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 # Sagemaker Execution Role
 Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
-region이 us-east-1일 경우
-`SageMakerExecutionRole-us-east-1-cdk`<br>
+region이 us-east-1일 경우<br>
+```SageMakerExecutionRole-us-east-1-cdk```
 
-region이 ap-northeast-2 일 경우
-`SageMakerExecutionRole-ap-northeast-2-cdk`
+region이 ap-northeast-2 일 경우<br>
+```SageMakerExecutionRole-ap-northeast-2-cdk```
 
 # Mac 노트북에서 실행시 Sagemaker Execution Role
 로컬 시스템에서는 aws config region으로 반경됩니다.<br>
