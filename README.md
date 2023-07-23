@@ -69,7 +69,7 @@ region이 us-east-1일 경우<br>
 region이 ap-northeast-2 일 경우<br>
 ```SageMakerExecutionRole-ap-northeast-2-cdk```
 
-## Mac 노트북에서 실행시 Sagemaker Execution Role
+## Mac 같은 노트북에서 실행시 Sagemaker Execution Role은 aws config default로 생성
 로컬 시스템에서는 aws config region으로 반경됩니다.<br>
 * `vi ~/.aws/config`
 
