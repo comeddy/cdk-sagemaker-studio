@@ -24,18 +24,18 @@ AWS CDK command line installed
 3. 기존 자격증명 파일 제거  
    Cloud9의 AWS SETTING > Credentials(AWS managed temporary credentials: disable)
 4. aws sts get-caller-identity 명령어로 변경확인
-* `aws sts get-caller-identity` 
-`
+  `aws sts get-caller-identity` 
+```
 {
     "Arn": "arn:aws:sts::045364116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
 }
-`
+```
 # Step 1 - Clone the code Github repo
-`git clone https://github.com/comeddy/cdk-sagemaker-studio.git`
+`git clone https://github.com/comeddy/cdk-sagemaker-studio.git`<br>
 `cd cdk-sagemaker-studio`
 
-bin/cdk-sagemaker-studio.ts - 메인 CDK 앱과 스택이 정의된 엔트리 포인트 파일입니다.
-lib/cdk-sagemaker-studio-stack.ts -  스튜디오 도메인, 스튜디오 사용자 프로필 및 스튜디오 사용자 앱을 정의하는 세이지메이커 스튜디오 스택 파일입니다.
+`bin/cdk-sagemaker-studio.ts` - 메인 CDK 앱과 스택이 정의된 엔트리 포인트 파일입니다.<br>
+`lib/cdk-sagemaker-studio-stack.ts` -  스튜디오 도메인, 스튜디오 사용자 프로필 및 스튜디오 사용자 앱을 정의하는 세이지메이커 스튜디오 스택 파일입니다.
 # Welcome to your CDK TypeScript project
 
 This is a blank project for CDK development with TypeScript.
@@ -53,17 +53,19 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk diff`        compare deployed stack with current state
 
 # Sagemaker Execution Role
-Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.
+Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
 region이 us-east-1일 경우
-`SageMakerExecutionRole-us-east-1-cdk`
+`SageMakerExecutionRole-us-east-1-cdk`<br>
 
 region이 ap-northeast-2 일 경우
 `SageMakerExecutionRole-ap-northeast-2-cdk`
 
 # Mac 노트북에서 실행시 Sagemaker Execution Role
-로컬 시스템에서는 aws config region으로 반경됩니다.
-`vi ~/.aws/config`
+로컬 시스템에서는 aws config region으로 반경됩니다.<br>
+* `vi ~/.aws/config`
 
-`[default]
+```
+[default]
 region = us-east-1
-output = json`
+output = json
+```
