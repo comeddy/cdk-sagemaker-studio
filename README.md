@@ -26,12 +26,16 @@ import * as sagemaker from 'aws-cdk-lib/aws-sagemaker';
 
 # Step 1 - Cloud9 instance role change to role
 1. Cloud9을 위한 IAM 역할 생성
-   IAM > role 생성(역할 만들기) > EC2 사용사례 선택    
+   IAM > role 생성(역할 만들기) > EC2 사용사례 선택
+   ![images](images/ec2-role.png)    
 2. Role 만들고 Cloud9 권한 설정
    AdministratorAccess 권한설정 후 역할이름을 `devops-workshop-admin` 만듭니다.
+   ![images](images/devops-workshop-admin-role.png)
    Cloud9의 Manage EC2 instance > 작업(보안) > IAM 역할수정 > `devops-workshop-admin` 연결
+   ![images](images/instance-role-change.png)
 3. 기존 자격증명 파일 제거  
    Cloud9의 AWS SETTING > Credentials(AWS managed temporary credentials: disable)
+   ![images](images/diable-temporary.png)
 4. aws sts get-caller-identity 명령어로 변경확인
   `aws sts get-caller-identity` 
 ```
@@ -66,7 +70,10 @@ AWS 관리 콘솔에서 Cloud Formation을 열면 다음과 같은 SageMaker Stu
 ![images](images/cloudformation.png)
 
 ## Sagemaker Execution Role
-Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
+Sagemaker Execution Role은 Cloud9이 실행된 region 혹은 aws config region 이름으로 역할생성/소멸됩니다.<br>
+![images](images/domain-sagamaker.png)
+![images](images/sagemaker-profile.png)
+
 region이 us-east-1일 경우<br>
 ```SageMakerExecutionRole-us-east-1-cdk```
 
@@ -82,3 +89,6 @@ region이 ap-northeast-2 일 경우<br>
 region = us-east-1
 output = json
 ```
+
+## Sagemaker studio 실행
+![images](images/sagemaker-studio.png)
