@@ -1,4 +1,4 @@
-## Prerequisite
+# Prerequisite
 
 * Sign in to the [AWS Management Console](https://console.aws.amazon.com/)
 * Go to [Cloud9](https://console.aws.amazon.com/cloud9/) environment. and Click Open IDE
@@ -52,7 +52,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 
-# Sagemaker Execution Role
+## Sagemaker Execution Role
 Sagemaker Execution Role은 Cloud9이 실행된 region의 IAM 역할에 아래네이밍으로 생성/소멸됩니다.<br>
 region이 us-east-1일 경우<br>
 ```SageMakerExecutionRole-us-east-1-cdk```
@@ -60,7 +60,7 @@ region이 us-east-1일 경우<br>
 region이 ap-northeast-2 일 경우<br>
 ```SageMakerExecutionRole-ap-northeast-2-cdk```
 
-# Mac 노트북에서 실행시 Sagemaker Execution Role
+## Mac 노트북에서 실행시 Sagemaker Execution Role
 로컬 시스템에서는 aws config region으로 반경됩니다.<br>
 * `vi ~/.aws/config`
 
