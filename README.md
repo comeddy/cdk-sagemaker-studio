@@ -69,19 +69,20 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 AWS 관리 콘솔에서 Cloud Formation을 열면 다음과 같은 SageMaker Studio 스택과 리소스가 생성된 것을 볼 수 있습니다.
 ![images](images/cloudformation.png)
 
-## Sagemaker Execution Role
+# Step 5 - Sagemaker Domain 과 Execution Role 생성
+Sagemaker에 SageMakerDomain 이름으로 도메인 생성 확인합니다.
+![images](images/sagemaker.png)
 Sagemaker Execution Role은 Cloud9이 실행된 region 혹은 aws config region 이름으로 역할생성/소멸됩니다.<br>
 ![images](images/domain-sagamaker.png)
-![images](images/sagemaker-profile.png)
-
 region이 us-east-1일 경우<br>
 ```SageMakerExecutionRole-us-east-1-cdk```
 
 region이 ap-northeast-2 일 경우<br>
 ```SageMakerExecutionRole-ap-northeast-2-cdk```
+![images](images/sagemaker-profile.png)
 
-## Mac 같은 노트북에서 실행시 Sagemaker Execution Role은 aws config default로 생성
-로컬 시스템에서는 aws config region으로 반경됩니다.<br>
+## Sagemaker Execution Role이 Mac 같은 노트북에서 실행시 aws config default로 생성
+로컬 시스템에서는 aws config default region 변경하여 반영합니다.<br>
 * `vi ~/.aws/config`
 
 ```
@@ -90,5 +91,5 @@ region = us-east-1
 output = json
 ```
 
-## Sagemaker studio 실행
+## Sagemaker studio 사용자 프로필 로그인
 ![images](images/sagemaker-studio.png)
