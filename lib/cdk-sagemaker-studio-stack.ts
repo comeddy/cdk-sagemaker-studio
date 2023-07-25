@@ -21,6 +21,10 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
       ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess')
     );
 
+    sagemakerExecutionRole.addManagedPolicy(
+      ManagedPolicy.fromAwsManagedPolicyName('AmazonS3FullAccess')
+    );
+
     const userSettings = {
       executionRole: sagemakerExecutionRole.roleArn,
     }
