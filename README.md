@@ -36,10 +36,16 @@ cdk-sagemaker-studio-stack.ts의 첫번재로 sagamaker execution rolename 을 �
 
 Managed Policy 권한을 role에 부여합니다.
 ```
+    // add AmazonSageMakerFullAccess and AmazonS3FullAccess to the role
     sagemakerExecutionRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess')
     );
 
+    sagemakerExecutionRole.addManagedPolicy(
+      ManagedPolicy.fromAwsManagedPolicyName('AmazonS3FullAccess')
+    );
+    
+    // create a SageMakerUserSettings for the SageMaker Studio
     const userSettings = {
       executionRole: sagemakerExecutionRole.roleArn,
     }
@@ -47,15 +53,16 @@ Managed Policy 권한을 role에 부여합니다.
 
 Default VPC의 subnet에 Sagemaker Domain을 CfnDomain으로 생성합니다.
 ```
-    // create a SageMaker domain
-    const defaultVpc = aws_ec2.Vpc.fromLookup(this, 'DefaultVpc', {
+    // set a default VPC for the SageMaker Studio
+    const defaultVpc = ec2.Vpc.fromLookup(this, 'DefaultVpc', {
       isDefault: true
     });
 
     const vpcSubnets = defaultVpc.selectSubnets({
-      subnetType: aws_ec2.SubnetType.PUBLIC
+      subnetType: ec2.SubnetType.PUBLIC
     });
 
+    // create a SageMakerDomain for the SageMaker Studio
     const domain = new sagemaker.CfnDomain(this, 'SageMakerDomain', {
       authMode: 'IAM',
       domainName: 'SageMakerDomain',
@@ -65,8 +72,9 @@ Default VPC의 subnet에 Sagemaker Domain을 CfnDomain으로 생성합니다.
     });
 ```
 
-profile name을 team과 name으로 하여 Sagemaker 사용자를 생성합니다.
+profile name을 team과 name으로 조합하여 Sagemaker 사용자를 생성합니다.
 ```
+    // create a SageMakerUserProfile for the SageMaker Studio
     const profile = {'team': 'data-sciences', 'name': 'youngjin'}
     new sagemaker.CfnUserProfile(this, 'SageMakerUserProfile', {
       domainId: domain.attrDomainId,
@@ -91,7 +99,7 @@ profile name을 team과 name으로 하여 Sagemaker 사용자를 생성합니다
   `aws sts get-caller-identity` 
 ```
 {
-    "Arn": "arn:aws:sts::045364116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
+    "Arn": "arn:aws:sts::04XXX4116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
 }
 ```
 # Step 2 - Clone the code Github repo
@@ -125,9 +133,6 @@ Sagemaker에 SageMakerDomain 이름으로 도메인 생성 확인합니다.
 ![images](images/sagemaker.png)<br>
 Sagemaker Execution Role은 Cloud9이 실행된 region 혹은 aws config region 이름으로 역할생성/소멸됩니다.<br>
 ![images](images/domain-sagamaker.png)<br>
-region이 us-east-1일 경우<br>
-```SageMakerExecutionRole-us-east-1-cdk```
-
 ![images](images/sagemaker-profile.png)<br>
 ![images](images/sagemaker-studio-0.png)
 ## Mac 같은 노트북에서 멀티리전에 배포시 aws config default를 변경

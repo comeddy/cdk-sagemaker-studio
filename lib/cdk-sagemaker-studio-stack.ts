@@ -17,6 +17,7 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
       description: 'SageMaker execution role'
     });  
     
+    // add AmazonSageMakerFullAccess and AmazonS3FullAccess to the role
     sagemakerExecutionRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess')
     );
@@ -24,12 +25,13 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
     sagemakerExecutionRole.addManagedPolicy(
       ManagedPolicy.fromAwsManagedPolicyName('AmazonS3FullAccess')
     );
-
+    
+    // create a SageMakerUserSettings for the SageMaker Studio
     const userSettings = {
       executionRole: sagemakerExecutionRole.roleArn,
     }
 
-    // create a SageMaker domain
+    // set a default VPC for the SageMaker Studio
     const defaultVpc = ec2.Vpc.fromLookup(this, 'DefaultVpc', {
       isDefault: true
     });
@@ -38,6 +40,7 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
       subnetType: ec2.SubnetType.PUBLIC
     });
 
+    // create a SageMakerDomain for the SageMaker Studio
     const domain = new sagemaker.CfnDomain(this, 'SageMakerDomain', {
       authMode: 'IAM',
       domainName: 'SageMakerDomain',
@@ -46,6 +49,7 @@ export class CdkSagemakerStudioStack extends cdk.Stack {
       vpcId: defaultVpc.vpcId,
     });
 
+    // create a SageMakerUserProfile for the SageMaker Studio
     const profile = {'team': 'data-sciences', 'name': 'youngjin'}
     new sagemaker.CfnUserProfile(this, 'SageMakerUserProfile', {
       domainId: domain.attrDomainId,
