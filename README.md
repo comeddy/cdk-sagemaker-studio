@@ -90,12 +90,12 @@ profile name을 team과 name으로 조합하여 Sagemaker 사용자를 생성합
 2. Role 만들고 Cloud9 권한 설정
    AdministratorAccess 권한설정 후 역할이름을 `devops-workshop-admin` 만듭니다.
    ![images](images/devops-workshop-admin-role.png)
-   Cloud9의 Manage EC2 instance > 작업(보안) > IAM 역할수정 > `devops-workshop-admin` 연결
+3. Cloud9의 Manage EC2 instance > 작업(보안) > IAM 역할수정 > `devops-workshop-admin` 연결
    ![images](images/instance-role-change.png)
-3. 기존 자격증명 파일 제거  
+4. 기존 자격증명 파일 제거  
    Cloud9의 AWS SETTING > Credentials(AWS managed temporary credentials: disable)
    ![images](images/diable-temporary.png)
-4. aws sts get-caller-identity 명령어로 변경확인
+5. aws sts get-caller-identity 명령어로 변경확인
   `aws sts get-caller-identity` 
 ```
 {
