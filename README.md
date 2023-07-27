@@ -12,10 +12,19 @@ AWS CDK command line installed
 * `cdk --version`<br>
   This cdk test on 2.88.0 (build 5d497f9)
 
+# Step 1 - Clone the code Github repo
+`git clone https://github.com/comeddy/cdk-sagemaker-studio.git`<br>
+`cd cdk-sagemaker-studio`
+
+## lib install 
+`npm install aws-cdk-lib`
+`npm install constructs`
+
+## bin/lib description
+`bin/cdk-sagemaker-studio.ts` - 메인 CDK 앱과 스택이 정의된 엔트리 포인트 파일입니다.<br>
+`lib/cdk-sagemaker-studio-stack.ts` -  스튜디오 도메인, 스튜디오 사용자 프로필 및 스튜디오 사용자 앱을 정의하는 세이지메이커 스튜디오 스택 파일입니다.
+
 ## CDK version2 install
-* `npm install aws-cdk-lib`
-* `npm install constructs`
-  
 이 문서에 표시된 모든 하위 라이브러리는 이미 aws-cdk-lib에 있습니다.
 ```
 // for v1
@@ -82,8 +91,7 @@ profile name을 team과 name으로 조합하여 Sagemaker 사용자를 생성합
       userSettings: userSettings,
     });
 ```
-
-# Step 1 - Cloud9 instance role change to role
+# Step 2 - Cloud9 instance role change to role
 1. Cloud9을 위한 IAM 역할 생성
    IAM > role 생성(역할 만들기) > EC2 사용사례 선택
    ![images](images/ec2-role.png)    
@@ -102,14 +110,7 @@ profile name을 team과 name으로 조합하여 Sagemaker 사용자를 생성합
     "Arn": "arn:aws:sts::04XXX4116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
 }
 ```
-# Step 2 - Clone the code Github repo
-`git clone https://github.com/comeddy/cdk-sagemaker-studio.git`<br>
-`cd cdk-sagemaker-studio`
-
-`bin/cdk-sagemaker-studio.ts` - 메인 CDK 앱과 스택이 정의된 엔트리 포인트 파일입니다.<br>
-`lib/cdk-sagemaker-studio-stack.ts` -  스튜디오 도메인, 스튜디오 사용자 프로필 및 스튜디오 사용자 앱을 정의하는 세이지메이커 스튜디오 스택 파일입니다.
 # Step 3 - Welcome to your CDK TypeScript project
-
 This is a blank project for CDK development with TypeScript.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
