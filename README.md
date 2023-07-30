@@ -104,7 +104,7 @@ profile name을 team과 name으로 조합하여 Sagemaker 사용자를 생성합
    Cloud9의 AWS SETTING > Credentials(AWS managed temporary credentials: disable)
    ![images](images/diable-temporary.png)
 5. aws sts get-caller-identity 명령어로 변경확인
-  `aws sts get-caller-identity` 
+  `aws sts get-caller-identity`<br>
 ```
 {
     "Arn": "arn:aws:sts::04XXX4116382:assumed-role/devops-workshop-admin/i-00a2ff1a3281076d4"
