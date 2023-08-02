@@ -17,7 +17,7 @@ AWS CDK command line installed
 `cd cdk-sagemaker-studio`
 
 ## lib install 
-`npm install aws-cdk-lib`
+`npm install aws-cdk-lib`<br>
 `npm install constructs`
 
 ## bin/lib description
